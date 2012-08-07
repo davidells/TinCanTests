@@ -45,20 +45,6 @@ asyncTest('POST /w ID', function () {
 });
 
 
-asyncTest('Authentication', function () {
-	"use strict";
-	var env = statementsEnv,
-		url = '/statements?statementId=' + env.id,
-		util = env.util;
-
-
-	util.request('PUT', url, JSON.stringify(env.statement), false, 401, 'Unauthorized', function () {
-		util.request('GET', url, null, false, 401, 'Unauthorized', function () {
-			start();
-		});
-	});
-});
-
 asyncTest('Reject Statement Modification', function () {
 	"use strict";
 
