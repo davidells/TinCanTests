@@ -39,12 +39,12 @@ asyncTest('Definition, update', function () {
     var myActivityUpdate = { "id":myActivityId, "definition":{"name": {"und" : "My Test Activity"}  } };
     var myStatement = { 
         "actor":env.statement.actor,
-        "verb":"imported", 
+        "verb":env.util.getADLVerb("imported"), 
         "object":myActivity 
     };
     var myStatementUpdate = { 
         "actor":env.statement.actor,
-        "verb":"imported", 
+        "verb":env.util.getADLVerb("imported"), 
         "object":myActivityUpdate 
     };
 
@@ -100,7 +100,7 @@ asyncTest('Definition, extensions', function () {
         }
     };
 
-    var myStatements = [{ actor:env.statement.actor, verb: "imported", object: myActivity }];
+    var myStatements = [{ actor:env.statement.actor, verb: env.util.getADLVerb("imported"), object: myActivity }];
 
     //Import activity through statement
     env.util.request('POST','/statements',JSON.stringify(myStatements), true, 200, 'OK', function(){
@@ -166,7 +166,7 @@ asyncTest('Definition, extensions', function () {
       }
     };
 
-    var myStatements = [{ actor:env.statement.actor, verb: "imported", object: myActivity }];
+    var myStatements = [{ actor:env.statement.actor, verb: env.util.getADLVerb("imported"), object: myActivity }];
 
     //Import activity through statement
     env.util.request('POST','/statements',JSON.stringify(myStatements), true, 200, 'OK', function(){

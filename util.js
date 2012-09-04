@@ -27,11 +27,11 @@ Util.init = function (env) {
 		env.id = env.util.ruuid();
 		env.statement = {
 			actor: {
-                "objectType": "Person",
+                "objectType": "Agent",
 				"mbox": env.util.actor.mbox,
 				"name": env.util.actor.name
 			},
-			verb: "experienced",
+			verb: env.util.getADLVerb("experienced"),
 			object: {
 				id: env.util.activity.id,
 				definition: {}
@@ -107,11 +107,23 @@ Util.prototype.oAuthSign = function(url, method, data, auth) {
 };
 
 
+Util.prototype.getADLVerb = function(name) {
+    return {
+        "id":"http://adlnet.gov/expapi/verbs/" + name,
+        "display":{"en-US":name}
+    }
+};
+
+Util.prototype.getADLActivityType = function(type) {
+    return "http://adlnet.gov/expapi/activities/" + type;
+};
+
 Util.prototype.endpoint = Config.endpoint;
-Util.prototype.actor = { mbox: ["mailto:auto_tests@example.scorm.com"], name: ["Auto Test Learner"]};
-Util.prototype.verb = "experienced";
+Util.prototype.actor = { mbox: "mailto:auto_tests@example.scorm.com", name: "Auto Test Learner"};
+Util.prototype.verb = Util.prototype.getADLVerb("experienced");
 Util.prototype.activity = {id : "http://scorm.com/tincan/autotest/testactivity", definition : { name : { 'en-US' : 'Tin Can Auto Test Activity' } } };
 Util.prototype.actorUniqueProps = ['mbox', 'account', 'openid', 'mbox_sha1sum', 'account'];
+
 
 Util.prototype.areActorsEqual = function (source, target) {
 	"use strict";
@@ -231,6 +243,7 @@ Util.prototype.request = function (method, url, data, useAuth, expectedStatus, e
     
     //Consolidate all the headers
     var headers = {};
+    headers["X-Experience-API-Version"] = "0.95";
     if(extraHeaders === undefined || extraHeaders['Content-Type'] === undefined){
         headers["Content-Type"] = contentType;
     }
@@ -733,3 +746,4 @@ Util.prototype.parseQueryString = function(qs, parsed) {
 	
 	return parsed;
 };
+

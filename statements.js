@@ -71,7 +71,7 @@ asyncTest('PUT / GET w/ Extensions', function() {
     var myStatement = {
         id: myStatementId,
         actor: env.statement.actor,
-        verb: "passed",
+        verb: env.util.getADLVerb("passed"),
         object: env.statement.object,
         context: {
             registration: myRegId,
@@ -106,7 +106,7 @@ asyncTest('PUT / GET w/ Revision and Platform', function() {
     var myStatement = {
         id: myStatementId,
         actor: env.statement.actor,
-        verb: "experienced",
+        verb: env.util.getADLVerb("experienced"),
         object: env.statement.object,
         context: {
             registration: myRegId,
@@ -129,7 +129,7 @@ asyncTest('PUT / GET Actor as Object', function() {
     var url = '/statements?statementId=' + myStatementId;
     var myStatement = {
         id: myStatementId,
-        verb: "imported",
+        verb: env.util.getADLVerb("imported"),
         object: env.statement.object,
         actor: env.statement.actor
     };
@@ -152,7 +152,7 @@ asyncTest('Duration', function() {
     var myStatement = {
         id: myStatementId,
         actor: env.statement.actor,
-        verb: "attempted",
+        verb: env.util.getADLVerb("attempted"),
         object: env.statement.object,
         result: {duration: "P1Y2MT10M15.12S"} 
     };
@@ -174,7 +174,7 @@ asyncTest('Reject Bad duration', function() {
     var url = '/statements?statementId=' + myStatementId;
     var myStatement = {
         id: myStatementId,
-        verb: "attempted",
+        verb: env.util.getADLVerb("attempted"),
         object: env.statement.actor,
         result: { duration: "not a duration" }
     };
@@ -184,142 +184,6 @@ asyncTest('Reject Bad duration', function() {
 	});
         
 });
-
-
-asyncTest('Actor Modification', function () {
-	"use strict";
-	var env = statementsEnv,
-		util = env.util,
-		otherId = util.ruuid(),
-		url = '/statements?statementId=',
-        origStatement = JSON.parse(JSON.stringify(env.statement)),
-		modLearnerName = 'Renamed Auto Test Learner',
-		modStatement;
-
-    origStatement.actor.mbox = ["mailto:modification.test@projecttincan.com"];
-
-	util.request('PUT', url + util.ruuid(), JSON.stringify(origStatement), true, null, null, function () {
-		modStatement = JSON.stringify(origStatement).replace(origStatement.actor.name[0], modLearnerName);
-		util.request('PUT', url + otherId, modStatement , true, 204, 'No Content', function () {
-			util.request('GET', url + otherId, null, true, 200, 'OK', function (xhr) {
-				var response;
-				response = util.tryJSONParse(xhr.responseText);
-
-				// verify statement is returned with modified name
-				ok(util.inList(modLearnerName, response.actor.name), "modified name in list of names");
-				response.actor.name = [modLearnerName];
-				util.validateStatement(JSON.stringify(response), JSON.parse(modStatement), otherId);
-
-                var actorParam = encodeURIComponent(JSON.stringify(origStatement.actor));
-				util.request('GET', '/actors?actor=' + actorParam, null, true, 200, 'OK', function (xhr) {
-					util.testListInList([origStatement.actor.name[0],modLearnerName], util.tryJSONParse(xhr.responseText).name, 'Both actor names should now be reflected on actor object.');
-					start();
-				});
-			});
-		});
-	});
-});
-
-asyncTest('Actor Transitive equalilty', function () {
-	"use strict";
-	var env = statementsEnv,
-		util = env.util,
-		otherId = util.ruuid(),
-		url = '/statements?',
-		modLearnerName = 'Renamed Auto Test Learner',
-		modStatements, prop, ids, resultIds = [], resultStatements, ii, account, mbox1, mbox2;
-		
-	account = [ { accountServiceHomePage : "http://projecttincan.com/TCAPI_autotest/"+otherId, accountName : "autotestuser"}];
-	mbox1 = ["mailto:" + otherId + "3@example.scorm.com"];
-	mbox2 = ["mailto:" + otherId + "2@example.scorm.com"];
-
-	modStatements = [util.clone(env.statement),util.clone(env.statement),util.clone(env.statement),util.clone(env.statement)];
-	modStatements[0].actor = { mbox: mbox1, name: ["Auto Test Transitive Learner " + otherId]}
-	modStatements[1].actor = { openid : ["http://example.com/some_unique_openId_autotest_"+otherId], account : account };
-	modStatements[2].actor = { mbox: [mbox1[0],mbox2[0]] };
-	modStatements[3].actor = { mbox_sha1sum: [""], account :account };
-	modStatements[3].actor.mbox_sha1sum[0] = Crypto.util.bytesToHex(Crypto.SHA1(mbox2[0], { asBytes: true }));
-	util.request('POST', url, JSON.stringify(modStatements), true, 200, 'OK', function (xhr) {
-
-		ids = util.tryJSONParse(xhr.responseText);
-
-		// should be able to find all four statements based on initial actor information
-		var filters = [];
-		var queryString = [];
-		filters.actor = JSON.stringify(modStatements[0].actor, null, 4);
-		filters.limit='4';
-		
-		for (prop in filters) {
-			if (filters.hasOwnProperty(prop)) {
-				queryString.push(prop + '=' + encodeURIComponent(filters[prop]));
-			}
-		}
-
-		util.request('GET', url +  queryString.join('&'), null, true, 200, 'OK', function (xhr) {
-			resultStatements = util.tryJSONParse(xhr.responseText).statements;
-			for (ii = 0; ii < resultStatements.length; ii++) {
-				resultIds.push(resultStatements[ii].id);
-			}
-			util.testListInList(ids, resultIds, "should be able to get back all statements based on first actor.: " + url +  queryString.join('&'));
-			start();
-		});
-	});
-});
-
-asyncTest('Actor Transitive equalilty, multi-post', function () {
-	"use strict";
-	var env = statementsEnv,
-		util = env.util,
-		otherId = util.ruuid(),
-		url = '/statements?',
-		modLearnerName = 'Renamed Auto Test Learner',
-		modStatements, prop, ids, resultIds = [], resultStatements, ii, account, mbox1, mbox2;
-		
-	account = [ { accountServiceHomePage : "http://projecttincan.com/TCAPI_autotest/"+otherId, accountName : "autotestuser"}];
-	mbox1 = ["mailto:" + otherId + "3@example.scorm.com"];
-	mbox2 = ["mailto:" + otherId + "2@example.scorm.com"];
-
-	ids = [util.ruuid(), util.ruuid(), util.ruuid(), util.ruuid()];
-
-	modStatements = [util.clone(env.statement),util.clone(env.statement),util.clone(env.statement),util.clone(env.statement)];
-	modStatements[0].actor = { mbox: mbox1, name: ["Auto Test Transitive Learner " + otherId]}
-	modStatements[1].actor = { openid : ["http://example.com/some_unique_openId_autotest_"+otherId], account : account };
-	modStatements[2].actor = { mbox: [mbox1[0],mbox2[0]] };
-	modStatements[3].actor = { mbox_sha1sum: [""], account :account };
-	modStatements[3].actor.mbox_sha1sum[0] = Crypto.util.bytesToHex(Crypto.SHA1(mbox2[0], { asBytes: true }));
-	
-	for ( ii = 0; ii < ids.length; ii++) {
-		modStatements[ii].id = ids[ii];
-	}
-	util.request('POST', url, JSON.stringify([modStatements[0]]), true, 200, 'OK', function () {
-		util.request('POST', url, JSON.stringify([modStatements[1]]), true, 200, 'OK', function () {
-			util.request('POST', url, JSON.stringify([modStatements[2]]), true, 200, 'OK', function () {
-				util.request('POST', url, JSON.stringify([modStatements[3]]), true, 200, 'OK', function () {
-
-					// should be able to find all four statements based on initial actor information
-					var filters = [];
-					var queryString = [];
-					filters.actor = JSON.stringify(modStatements[0].actor, null, 4);
-					filters.limit='4';
-					
-					util.request('GET', url +  util.buildQueryString(filters), null, true, 200, 'OK', function (xhr) {
-						resultStatements = util.tryJSONParse(xhr.responseText).statements;
-						for (ii = 0; ii < resultStatements.length; ii++) {
-							resultIds.push(resultStatements[ii].id);
-						}
-						util.testListInList(ids, resultIds, "should be able to get back all statements based on first actor.: " + url +  queryString.join('&'));
-						
-						util.request('GET', '/actors?actor=' + encodeURIComponent(filters.actor), null, true, 200, 'OK', function (xhr) {
-							util.testListInList([mbox1[0], mbox2[0]], util.tryJSONParse(xhr.responseText).mbox, 'Mboxes for all actors should now be reflected on actor object.');
-							start();
-						});
-					});
-				});
-			});
-		});
-	});
-});
-
 
 
 asyncTest('Reject Bad Verb', function () {
@@ -368,14 +232,14 @@ asyncTest('Reject Bad interactionType', function() {
 
     var myObj = env.util.clone(env.statement.object);
     myObj["definition"] = {
-        type: "cmi.interaction",
+        type: env.util.getADLActivityType("cmi.interaction"),
         interactionType: "bad type"
     };
 
     var myStatement = {
         id: myStatementId,
         actor: env.statement.actor,
-        verb: "attempted",
+        verb: env.util.getADLVerb("attempted"),
         object: myObj
     };
 
@@ -400,12 +264,17 @@ asyncTest('Interaction Components', function() {
 
     function checkComponentSet(interactionType, componentName, shouldWork, callback){
         activity["definition"] = {
-            type: "cmi.interaction",
+            type: env.util.getADLActivityType("cmi.interaction"),
             interactionType: interactionType
         };
         activity.definition[componentName] = components;
 
-        var stmt = {id: env.util.ruuid(), actor: env.statement.actor, verb: "answered", object: activity};
+        var stmt = {
+            id: env.util.ruuid(), 
+            actor: env.statement.actor, 
+            verb: env.util.getADLVerb("answered"), 
+            object: activity
+        };
 
         var url = '/statements?statementId=' + stmt.id;
         var expectedCode = shouldWork ? 204 : 400;
@@ -448,7 +317,7 @@ asyncTest('Reject Bad activityType', function() {
     var myStatement = {
         id: myStatementId,
         actor: env.statement.actor,
-        verb: "attempted",
+        verb: env.util.getADLVerb("attempted"),
         object: myObj
     };
 
@@ -468,7 +337,7 @@ asyncTest('Reject Bad mbox', function() {
     var myStatement = {
         id: myStatementId,
         actor: myActor,
-        verb: "attempted",
+        verb: env.util.getADLVerb("attempted"),
         object: env.statement.object
     };
 
@@ -880,13 +749,13 @@ asyncTest('GET, sparse == false', function () {
     var myActivitySparse = { "id":myActivityId };
     var statement1 = { 
         "actor":actor, 
-        "verb":"imported", 
+        "verb":env.util.getADLVerb("imported"), 
         "object":myActivityFull, 
         "context":{"registration":regId} 
     };
     var statement2 = { 
         "actor":actor, 
-        "verb":"attempted", 
+        "verb":env.util.getADLVerb("attempted"), 
         "object":myActivitySparse, 
         "context":{"registration":regId} 
     };
@@ -917,7 +786,7 @@ function getGolfStatement(id) {
 	var ii, util = statementsEnv.util;
 
 	for (ii = 0; ii < util.golfStatements.length; ii++) {
-		if (util.golfStatements[ii].object.id === id && util.golfStatements[ii].verb != "imported") {
+		if (util.golfStatements[ii].object.id === id && util.golfStatements[ii].verb.id != env.util.getADLVerb("imported").id) {
 			return util.golfStatements[ii];
 		}
 	}
@@ -948,7 +817,7 @@ asyncTest('ActorTypes', function() {
     var myStatement = {
         actor: env.statement.actor,
         id: myStatementId,
-        verb: "attempted",
+        verb: env.util.getADLVerb("attempted"),
         object: env.statement.object,
         context: { instructor : 
         	{ objectType : "Agent",
@@ -1076,7 +945,7 @@ asyncTest('voiding statements', function () {
         var stmt = {
             "id":statementId,
             "actor":env.statement.actor,
-            "verb":"voided",
+            "verb":env.util.getADLVerb("voided"),
             "object":{ "objectType":"Statement", "id":statementIdToVoid }
         };
         var url = '/statements?statementId=' + stmt.id;
@@ -1169,15 +1038,15 @@ asyncTest('statement validation', function () {
         function(cb){
             //Actor with no IFPs
             var stmtCopy = JSON.parse(statementJson);
-            stmtCopy.actor = { "objectType":"Agent", "name":["Unknown Actor"] };
+            stmtCopy.actor = { "objectType":"Agent", "name":"Unknown Actor" };
             assertBadStatement(stmtCopy, cb);
         },
         function(cb){
             //Actor with crappy account
             var stmtCopy = JSON.parse(statementJson);
-            stmtCopy.actor.account = [{"accountServiceHomePage":"", "accountName":"dummy"}];
+            stmtCopy.actor.account = {"homePage":"", "name":"dummy"};
             assertBadStatement(stmtCopy, function(){
-                stmtCopy.actor.account = [{"accountServiceHomePage":"http://example.org", "accountName":""}];
+                stmtCopy.actor.account = {"homePage":"http://example.org", "name":""};
                 assertBadStatement(stmtCopy, cb);
             });
         },
@@ -1196,7 +1065,7 @@ asyncTest('statement validation', function () {
         function(cb){
             //Instructor in context with no IFPs
             var stmtCopy = JSON.parse(statementJson);
-            stmtCopy.context = {"instructor":{"objectType":"Agent", "name":["Unknown Actor"]}};
+            stmtCopy.context = {"instructor":{"objectType":"Agent", "name":"Unknown Actor"}};
             assertBadStatement(stmtCopy, cb);
         },
         function(cb){
@@ -1209,102 +1078,3 @@ asyncTest('statement validation', function () {
         start
     ]);
 });
-
-
-/*asyncTest('Statements, descendants filter', function () {
-	"use strict";
-	var env = statementsEnv,
-		util = env.util,
-		url = '/statements',
-		statement,
-		testActivity = { id: 'com.scorm.golfsamples.interactions.playing_1'},
-		ancestorId = 'scorm.com/GolfExample_TCAPI',
-		ancestorFilter = encodeURIComponent(JSON.stringify({id : ancestorId}));
-
-	// add statement to find
-	statement = util.clone(getGolfStatement(testActivity.id));
-	statement.id = util.ruuid();
-	statement.context.registration = statement.id;
-
-	//?limit=1&activity=' + encodeURIComponent(JSON.stringify(testActivity))
-	// statement not found by ancestor w/o using 'descendant' flag
-	util.request('POST', url, JSON.stringify(golfStatements), true, 200, 'OK', function (xhr) {
-	    util.request('PUT', url + "?statementId=" + statement.id, JSON.stringify(statement, null, 4), true, 204, 'No Content', function () {
-	    	util.request('GET', url + '?registration=' + statement.context.registration + '&object=' + ancestorFilter, null, true, 200, 'OK', function (xhr) {
-	    		equal(JSON.parse(xhr.responseText).length, 0, 'response, find by ancestor no descendants flag');
-	    		util.request('GET', url + '?registration=' + statement.context.registration + '&descendants=true&object=' + ancestorFilter, null, true, 200, 'OK', function (xhr) {
-	    			var resultStatements = util.tryJSONParse(xhr.responseText),
-	    				resultStatement = resultStatements[0];
-	    			if (resultStatement === undefined) {
-	    				ok(false, 'statement not found using descendant filter');
-	    			} else {
-	    				equal(resultStatement.id, statement.id, 'correct statement found using descendant filter');
-	    			}
-	    			start();
-	    		});
-	    	});
-	    });
-    });
-
-	/*util.request('POST', url, 'limit=10', true, 200, 'OK', function (xhr) {
-		var statements = util.tryJSONParse(xhr.responseText),
-			statement,
-			filters = {},
-			prop,
-			queryString = [];
-
-		if (statements.length === 10) {
-			// pick a statement with statements stored before & after
-			statement = statements[5];
-
-			// add filters which match the selected statement
-			filters.since = (new Date(new Date(statement.stored).getTime() - 1)).toString();
-			filters.until = statement.stored;
-			filters.verb = statement.verb;
-			filters.object = JSON.stringify(statement.object, null, 4);
-			if (statement.registration !== undefined) {
-				filters.registration = statement.registraiton;
-			}
-			filters.actor = JSON.stringify(statement.actor, null, 4);
-
-			for (prop in filters) {
-				if (filters.hasOwnProperty(prop)) {
-					queryString.push(prop + '=' + encodeURIComponent(filters[prop]));
-				}
-			}
-
-			util.request('GET', url + statement.id, null, true, 200, 'OK', function (xhr) {
-				var results = util.tryJSONParse(xhr.responseText),
-					ii,
-					found = false;
-
-				results = [results];
-
-				for (ii = 0; ii < results.length; ii++) {
-					if (results[ii].id === statement.id) {
-						found = true;
-					}
-					equal(results[ii].stored, statement.stored, 'stored');
-					equal(results[ii].verb, statement.verb, 'verb');
-					if (statement.object.id !== undefined) {
-						// object is an activity
-						equal(results[ii].object.id, statement.object.id, 'object');
-					} else {
-						// object is an actor
-						ok(util.areActorsEqual(results[ii].object, statement.object), 'object');
-					}
-					if (statement.registration !== undefined) {
-						equal(results[ii].registration, statement.registration, 'registration');
-					}
-					// actor comparison
-					ok(util.areActorsEqual(results[ii].actor, statement.actor), 'actor');
-				}
-				ok(found, 'find statement filters based on');
-				start();
-			});
-		} else {
-			ok(false, 'Test requires at least 10 existing statements');
-			start();
-		}
-	});*/
-/*});*/

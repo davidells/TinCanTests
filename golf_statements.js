@@ -1,26 +1,32 @@
 golfStatements = [
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/attempted",
+        "display":{"en-US":"attempted"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/GolfAssessment.html",
       "definition":{
          "name": { "en-US" : "Golf Example Assessment" },
          "description": { "en-US" : "An Assessment for the Golf Example course." },
-         "type":"Assessment"
+         "type":"http://adlnet.gov/expapi/activities/assessment"
       }
    }
 },
 
 { 
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-    "verb":"imported",
+    "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
     "object":{
         "id":"com.scorm.golfsamples.context_other"
     }
@@ -28,14 +34,17 @@ golfStatements = [
 
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.playing_1",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "The rules of golf are maintained by:" },
          "interactionType":"choice",
          "correctResponsesPattern":["USGA"],
@@ -50,14 +59,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.playing_2",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "A score of two under par on a given hole is known as a(n):" },
          "interactionType":"choice",
          "correctResponsesPattern":["eagle"],
@@ -72,14 +84,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.playing_3",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "A typical golf course has ____ holes" },
          "interactionType":"numeric",
          "correctResponsesPattern":["18"]
@@ -88,14 +103,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.playing_4",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "In stableford scoring, the highest score wins."},
          "interactionType":"true-false",
          "correctResponsesPattern":["true"]
@@ -104,14 +122,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.playing_5",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "Par for a 175 yard hole is typically:" },
          "interactionType":"numeric",
          "correctResponsesPattern":["3"]
@@ -120,14 +141,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.etiquette_1",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "When another player is attempting a shot, it is best to stand:" },
          "interactionType":"choice",
          "correctResponsesPattern":["out_of_sight"],
@@ -141,14 +165,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.etiquette_2",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "Generally sand trap rakes should be left outside of the hazard" },
          "interactionType":"true-false",
          "correctResponsesPattern":["true"]
@@ -157,14 +184,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.etiquette_3",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "The player with the best score on previous hole tees off:" },
          "interactionType":"choice",
          "correctResponsesPattern":["first"],
@@ -178,14 +208,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.handicap_1",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "Which formula is used to calculate the 'course handicap'?"},
          "interactionType":"choice",
          "correctResponsesPattern":["choice_3"],
@@ -199,14 +232,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.handicap_2",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "Golfer A has a course handicap of 6. Golfer B has a course handicap of 10. Golfer A shoots an 81. Golfer B shoots an 84. Golfer B wins the match be how many strokes?"},
          "interactionType":"numeric",
          "correctResponsesPattern":["1"]
@@ -215,14 +251,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.handicap_3",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "A 'scratch golfer' has a handicap of ___"},
          "interactionType":"numeric",
          "correctResponsesPattern":["0"]
@@ -231,14 +270,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.handicap_4",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "Golfer A has a course handicap of 3. Golfer B has a course handicap of 28. On the 6th handicap hole, how many strokes will Golfer A have to give Golfer B in match play?"},
          "interactionType":"numeric",
          "correctResponsesPattern":["2"]
@@ -247,14 +289,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.fun_1",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "To make friends on the golf course, you should play really slowly." },
          "interactionType":"true-false",
          "correctResponsesPattern":["false"]
@@ -263,14 +308,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.fun_2",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "Knickers indicate a refined sense of style." },
          "interactionType":"true-false",
          "correctResponsesPattern":["false"]
@@ -279,14 +327,17 @@ golfStatements = [
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"com.scorm.golfsamples.interactions.fun_3",
       "definition":{
-         "type":"cmi.interaction",
+         "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "You should take your score very seriously if you want to have a lot of fun on the course." },
          "interactionType":"true-false",
          "correctResponsesPattern":["false"]
@@ -296,10 +347,13 @@ golfStatements = [
 
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI",
       "definition":{
@@ -312,150 +366,195 @@ golfStatements = [
 
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/Playing/Par.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/Playing/Scoring.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/Playing/OtherScoring.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/Playing/RulesOfGolf.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/Etiquette/Course.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/Etiquette/Distracting.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/Etiquette/Play.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/Handicapping/Overview.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/Handicapping/CalculatingHandicap.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/Handicapping/CalculatingScore.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/Handicapping/Example.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/HavingFun/HowToHaveFun.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/HavingFun/MakeFriends.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/HavingFun/HowToBeStylish.html"
    }
 },
 {
    "actor": {
-       "mbox": ["mailto:tincan@scorm.com"],
-       "name": ["TinCan User"]
+       "mbox": "mailto:tincan@scorm.com",
+       "name": "TinCan User"
    },
-   "verb":"imported",
+   "verb":{
+        "id":"http://adlnet.gov/expapi/verbs/imported",
+        "display":{"en-US":"imported"}
+   },
    "object":{
       "id":"scorm.com/GolfExample_TCAPI/GolfAssessment.html"
    }
@@ -463,10 +562,13 @@ golfStatements = [
 
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.fun_3"
         },
@@ -483,10 +585,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.fun_2"
         },
@@ -503,10 +608,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.fun_1"
         },
@@ -523,10 +631,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.handicap_4"
         },
@@ -543,10 +654,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.handicap_3"
         },
@@ -563,10 +677,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.handicap_2"
         },
@@ -583,10 +700,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.handicap_1"
         },
@@ -603,10 +723,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.etiquette_3"
         },
@@ -623,10 +746,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.etiquette_2"
         },
@@ -643,10 +769,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.etiquette_1"
         },
@@ -663,10 +792,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.playing_5"
         },
@@ -683,10 +815,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.playing_4"
         },
@@ -703,10 +838,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.playing_3"
         },
@@ -723,10 +861,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.playing_2"
         },
@@ -742,10 +883,13 @@ golfStatements = [
     },
     {
         "actor": {
-            "mbox": ["mailto:tincan@scorm.com"],
-            "name": ["TinCan User"]
+            "mbox": "mailto:tincan@scorm.com",
+            "name": "TinCan User"
         },
-        "verb": "answered",
+        "verb":{
+             "id":"http://adlnet.gov/expapi/verbs/answered",
+             "display":{"en-US":"answered"}
+        },
         "object": {
             "id": "com.scorm.golfsamples.interactions.playing_1"
         },
