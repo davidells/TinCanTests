@@ -753,7 +753,7 @@ function verifyGolfDescendants(callback) {
 	});
 }
 
-// verify LRS can handle all supported actor types (agent & person)
+// verify LRS can handle all supported actor types (agent & group)
 asyncTest('ActorTypes', function() {
     var env = statementsEnv;
     var myStatementId = env.util.ruuid();
@@ -763,10 +763,34 @@ asyncTest('ActorTypes', function() {
         id: myStatementId,
         verb: env.util.getADLVerb("attempted"),
         object: env.statement.object,
-        context: { instructor : 
-        	{ objectType : "Agent",
+        context: { 
+            instructor : { 
+              objectType : "Agent",
         	  mbox: "mailto:auto_tests_agent@example.scorm.com",
-        	  name: "agent name"}
+        	  name: "Test Agent"
+            },
+            team: {
+                objectType: "Group",
+                mbox: "mailto:auto_tests_group@example.scorm.com",
+                name: "Test Group",
+                member: [
+                    { 
+                      objectType:"Agent",
+                      mbox: "mailto:auto_tests_agent@example.scorm.com",
+        	          name: "Test Agent" 
+                    },
+                    { 
+                      objectType:"Agent",
+                      mbox: "mailto:auto_tests_agent1@example.scorm.com",
+        	          name: "Test Agent 1" 
+                    },
+                    { 
+                      objectType:"Agent",
+                      mbox: "mailto:auto_tests_agent2@example.scorm.com",
+        	          name: "Test Agent 2" 
+                    }
+                ]
+            }
         }
     };
 
