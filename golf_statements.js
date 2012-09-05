@@ -358,7 +358,7 @@ golfStatements = [
       "id":"scorm.com/GolfExample_TCAPI",
       "definition":{
          "name": { "en-US" : "Golf Example - Tin Can Course" },
-         "type":"Course",
+         "type":"http://adlnet.gov/expapi/verbs/course",
          "description": { "en-US" : "An overview of how to play the great game of golf." }
       }
    }

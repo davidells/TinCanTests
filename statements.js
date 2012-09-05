@@ -353,65 +353,6 @@ asyncTest('Reject Bad mbox', function() {
         
 });
 
-asyncTest('pass special handling', function () {
-	"use strict";
-	var env = statementsEnv,
-		util = env.util,
-		url = '/statements?statementId=' + util.ruuid(),
-		statement = util.clone(env.statement);
-
-	statement.verb = 'passed';
-
-	util.request('PUT', url, JSON.stringify(statement), true, 204, 'No Content', function () {
-		util.request('GET', url, null, true, 200, 'OK', function (xhr) {
-			var response = JSON.parse(xhr.responseText);
-			equal(response.verb, 'passed', 'verb');
-			equal(response.result.success, true, 'success');
-			equal(response.result.completion, true, 'completion');
-			start();
-		});
-	});
-});
-
-asyncTest('fail special handling', function () {
-	"use strict";
-	var env = statementsEnv,
-		util = env.util,
-		url = '/statements?statementId=' + util.ruuid(),
-		statement = util.clone(env.statement);
-
-	statement.verb = 'failed';
-
-	util.request('PUT', url, JSON.stringify(statement), true, 204, 'No Content', function () {
-		util.request('GET', url, null, true, 200, 'OK', function (xhr) {
-			var response = JSON.parse(xhr.responseText);
-			equal(response.verb, 'failed', 'verb');
-			equal(response.result.success, false, 'success');
-			equal(response.result.completion, true, 'completion');
-			start();
-		});
-	});
-});
-
-asyncTest('completed special handling', function () {
-	"use strict";
-	var env = statementsEnv,
-		util = env.util,
-		url = '/statements?statementId=' + util.ruuid(),
-		statement = util.clone(env.statement);
-
-	statement.verb = 'completed';
-
-	util.request('PUT', url, JSON.stringify(statement), true, 204, 'No Content', function () {
-		util.request('GET', url, null, true, 200, 'OK', function (xhr) {
-			var response = JSON.parse(xhr.responseText);
-			equal(response.verb, 'completed', 'verb');
-			equal(response.result.completion, true, 'completion');
-			start();
-		});
-	});
-});
-
 asyncTest('POST multiple', function () {
 	"use strict";
 	var env = statementsEnv,
@@ -654,7 +595,7 @@ asyncTest('GET statements (via POST), all filters', function () {
             var sinceDate = util.DateFromISOString(statement.stored);
 			filters.since = util.ISODateString(new Date(sinceDate.getTime() - 1));
 			filters.until = statement.stored;
-			filters.verb = statement.verb;
+			filters.verb = statement.verb.id;
 			filters.object = JSON.stringify(statement.object, null, 4);
 			if (statement.context !== undefined && statement.context.registration !== undefined) {
 				filters.registration = statement.context.registration;
@@ -671,7 +612,7 @@ asyncTest('GET statements (via POST), all filters', function () {
 						found = true;
 					}
 					equal(results[ii].stored, statement.stored, 'stored');
-					equal(results[ii].verb, statement.verb, 'verb');
+					equal(results[ii].verb.id, statement.verb.id, 'verb');
 					if (statement.object.id !== undefined) {
 						// object is an activity
 						equal(results[ii].object.id, statement.object.id, 'object');
@@ -706,8 +647,11 @@ asyncTest('GET, verb filter', function () {
     var firstId = util.ruuid();
     var secondId = util.ruuid();
 
+    var experienced = env.util.getADLVerb('experienced');
+    var attempted = env.util.getADLVerb('attempted');
+
     statement.context = { "registration" : regId };
-	statement.verb = 'experienced';
+	statement.verb = experienced;
 
     async.waterfall([
 	    function(cb){
@@ -717,17 +661,17 @@ asyncTest('GET, verb filter', function () {
         },
         function(cb){
             //Put the second statement, different verb...
-	        statement.verb = 'attempted';
+	        statement.verb = attempted;
             var myUrl = url + '?statementId=' + secondId;
 	        util.request('PUT', myUrl, JSON.stringify(statement), true, 204, 'No Content', function(){cb(null)});
         },
         function(cb){
             //Use verb filter to find the expected statement
-		    util.request('GET', url + '?verb=attempted&registration='+regId+'&limit=1', null, true, 200, 'OK', 
+		    util.request('GET', url + '?verb=' + encodeURIComponent(attempted.id) + '&registration='+regId+'&limit=1', null, true, 200, 'OK', 
                 function (xhr) {
 		        	var statements = JSON.parse(xhr.responseText).statements;
                     equal(statements.length, 1, 'returned a statement');
-		        	equal(statements[0].verb, 'attempted', 'verb');
+		        	equal(statements[0].verb.id, env.util.getADLVerb('attempted').id, 'verb');
 		        	equal(statements[0].id, secondId, 'returned statement id');
 		        	cb(null);
 		        });
@@ -786,7 +730,7 @@ function getGolfStatement(id) {
 	var ii, util = statementsEnv.util;
 
 	for (ii = 0; ii < util.golfStatements.length; ii++) {
-		if (util.golfStatements[ii].object.id === id && util.golfStatements[ii].verb.id != env.util.getADLVerb("imported").id) {
+		if (util.golfStatements[ii].object.id === id && util.golfStatements[ii].verb.id != util.getADLVerb("imported").id) {
 			return util.golfStatements[ii];
 		}
 	}
@@ -821,8 +765,8 @@ asyncTest('ActorTypes', function() {
         object: env.statement.object,
         context: { instructor : 
         	{ objectType : "Agent",
-        	  mbox: ["mailto:auto_tests_agent@example.scorm.com"],
-        	  name: ["agent name"]}
+        	  mbox: "mailto:auto_tests_agent@example.scorm.com",
+        	  name: "agent name"}
         }
     };
 
@@ -946,7 +890,7 @@ asyncTest('voiding statements', function () {
             "id":statementId,
             "actor":env.statement.actor,
             "verb":env.util.getADLVerb("voided"),
-            "object":{ "objectType":"Statement", "id":statementIdToVoid }
+            "object":{ "objectType":"StatementRef", "id":statementIdToVoid }
         };
         var url = '/statements?statementId=' + stmt.id;
         util.request('PUT', url, JSON.stringify(stmt), true, expectedCode, expectedText, function(){callback(null);});
@@ -979,7 +923,7 @@ asyncTest('voiding statements', function () {
                 var response = util.tryJSONParse(xhr.responseText);
                 ok(response.object !== undefined);
                 if(response.object !== undefined){
-                    equal(response.object.objectType, "Statement");
+                    equal(response.object.objectType, "StatementRef");
                     equal(response.object.id, statement.id);
                 }
                 cb(null);

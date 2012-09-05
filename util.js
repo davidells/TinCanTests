@@ -480,7 +480,7 @@ Util.prototype.getServerTime = function (id, callback) {
 	if (id === null || id === undefined) {
 		id = this.ruuid();
         statement.actor = this.actor;
-		statement.verb = 'imported';
+		statement.verb = util.getADLVerb('imported');
 		statement.object = { id: "about:blank" };
 		this.request('PUT', '/statements?statementId=' + encodeURIComponent(id), JSON.stringify(statement), true, null, null, function (xhr) {
 			util.getServerTime(id, callback);
