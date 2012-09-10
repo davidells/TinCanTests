@@ -985,12 +985,12 @@ asyncTest('statement validation', function () {
 
     async.waterfall([
         //Actually, null actors are allowed in 0.9 (but not 0.95)
-        /*function(cb){
+        function(cb){
             //Blank actor
             var stmtCopy = JSON.parse(statementJson);
             stmtCopy.actor = null;
             assertBadStatement(stmtCopy, cb);
-        },*/
+        },
         function(cb){
             //Blank verb
             var stmtCopy = JSON.parse(statementJson);
@@ -1046,3 +1046,53 @@ asyncTest('statement validation', function () {
         start
     ]);
 });
+
+asyncTest('SubStatements', function () {
+	"use strict";
+	var env = statementsEnv;
+    var util = env.util;
+
+    var statement = util.clone(env.statement);
+    statement.id = util.ruuid();
+
+    var subStatement = util.clone(env.statement);
+    subStatement["objectType"] = "SubStatement";
+    delete subStatement["id"];
+    statement.object = subStatement;
+
+    var statementJson = JSON.stringify(statement);
+
+    var url = '/statements?statementId=' + statement.id;
+
+    function assertBadStatement(statement, cb){
+	    util.request('PUT', url, JSON.stringify(statement), true, 400, 'Bad Request', function(){ cb(null); });
+    }
+
+    async.waterfall([
+        function(cb){
+            //Sub statement with id
+            var stmtCopy = JSON.parse(statementJson);
+            stmtCopy.object.id = util.ruuid();
+            assertBadStatement(stmtCopy, cb);
+        },
+        function(cb){
+            //Sub statement with authority
+            var stmtCopy = JSON.parse(statementJson);
+            stmtCopy.object.authority = { "objectType":"Agent", "mbox":"mailto:test_authority@example.com" };
+            assertBadStatement(stmtCopy, cb);
+        },
+        function(cb){
+            //Sub statement with stored date
+            var stmtCopy = JSON.parse(statementJson);
+            stmtCopy.object.stored = util.ISODateString(new Date());
+            assertBadStatement(stmtCopy, cb);
+        },
+        function(cb){
+            //Good sub statement
+	        util.request('PUT', url, statementJson, true, 204, 'No Content', function(){ cb(null); });
+        },
+        //Start up the next test
+        start
+    ]);
+});
+
