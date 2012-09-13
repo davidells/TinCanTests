@@ -1167,6 +1167,13 @@ asyncTest('statement validation', function () {
             assertBadStatement(stmtCopy, cb);
         },
         function(cb){
+            //Object as statement, when parent statement is not voided
+            var stmtCopy = JSON.parse(statementJson);
+            stmtCopy.object = { "objectType":"Statement", "id":env.util.ruuid() };
+            stmtCopy.verb = 'experienced';
+            assertBadStatement(stmtCopy, cb);
+        },
+        function(cb){
             //Actor with no IFPs
             var stmtCopy = JSON.parse(statementJson);
             stmtCopy.actor = { "objectType":"Agent", "name":["Unknown Actor"] };
