@@ -228,6 +228,11 @@ asyncTest('Actor Transitive equalilty', function () {
 		url = '/statements?',
 		modLearnerName = 'Renamed Auto Test Learner',
 		modStatements, prop, ids, resultIds = [], resultStatements, ii, account, mbox1, mbox2;
+
+    if(Config !== undefined && Config.testActorMerging !== true){
+        start();
+        return;
+    }
 		
 	account = [ { accountServiceHomePage : "http://projecttincan.com/TCAPI_autotest/"+otherId, accountName : "autotestuser"}];
 	mbox1 = ["mailto:" + otherId + "3@example.scorm.com"];
@@ -275,6 +280,11 @@ asyncTest('Actor Transitive equalilty, multi-post', function () {
 		modLearnerName = 'Renamed Auto Test Learner',
 		modStatements, prop, ids, resultIds = [], resultStatements, ii, account, mbox1, mbox2;
 		
+    if(Config !== undefined && Config.testActorMerging !== true){
+        start();
+        return;
+    }
+
 	account = [ { accountServiceHomePage : "http://projecttincan.com/TCAPI_autotest/"+otherId, accountName : "autotestuser"}];
 	mbox1 = ["mailto:" + otherId + "3@example.scorm.com"];
 	mbox2 = ["mailto:" + otherId + "2@example.scorm.com"];
@@ -319,7 +329,6 @@ asyncTest('Actor Transitive equalilty, multi-post', function () {
 		});
 	});
 });
-
 
 
 asyncTest('Reject Bad Verb', function () {
@@ -1210,6 +1219,12 @@ asyncTest('statement validation', function () {
             //Bad date time
             var stmtCopy = JSON.parse(statementJson);
             stmtCopy.timestamp='trash';
+            assertBadStatement(stmtCopy, cb);
+        },
+        function(cb){
+            //Unknown field
+            var stmtCopy = JSON.parse(statementJson);
+            stmtCopy.trash='trash';
             assertBadStatement(stmtCopy, cb);
         },
         //Start up the next test
