@@ -1042,6 +1042,12 @@ asyncTest('statement validation', function () {
             stmtCopy.timestamp='trash';
             assertBadStatement(stmtCopy, cb);
         },
+        function(cb){
+            //Unknown field
+            var stmtCopy = JSON.parse(statementJson);
+            stmtCopy.trash='trash';
+            assertBadStatement(stmtCopy, cb);
+        },
         //Start up the next test
         start
     ]);
