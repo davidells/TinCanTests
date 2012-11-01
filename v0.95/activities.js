@@ -34,7 +34,7 @@ asyncTest('Definition, update', function () {
 	"use strict";
     var env = activityEnv;
 
-    var myActivityId = env.util.ruuid();
+    var myActivityId = "http://scorm.com/activities/" + env.util.ruuid();
     var myActivity = { "id":myActivityId, "definition":{"name": {"und" : "My Tezzzt Activity" } } };
     var myActivityUpdate = { "id":myActivityId, "definition":{"name": {"und" : "My Test Activity"}  } };
     var myStatement = { 
@@ -87,14 +87,14 @@ asyncTest('Definition, extensions', function () {
 	"use strict";
 	var env = activityEnv;
 
-    var myActivityId = env.util.ruuid();
+    var myActivityId = "http://scorm.com/activities/" + env.util.ruuid();
     var myActivity = { 
         id:myActivityId, 
         definition:{
             description: { "und" : "Extensions Activity" }, 
             extensions:{
-                extension_1:1,
-                extension_2:{
+                "http://scorm.com/extensions/extension_1":1,
+                "http://scorm.com/extensions/extension_2":{
                     obj:"test"} 
             }
         }

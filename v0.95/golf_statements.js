@@ -9,7 +9,7 @@ golfStatements = [
         "display":{"en-US":"attempted"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/GolfAssessment.html",
+      "id":"http://scorm.com/GolfExample_TCAPI/GolfAssessment.html",
       "definition":{
          "name": { "en-US" : "Golf Example Assessment" },
          "description": { "en-US" : "An Assessment for the Golf Example course." },
@@ -28,7 +28,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
     "object":{
-        "id":"com.scorm.golfsamples.context_other"
+        "id":"http://scorm.com/golfsamples.context_other"
     }
 },
 
@@ -42,7 +42,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.playing_1",
+      "id":"http://scorm.com/golfsamples.interactions.playing_1",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "The rules of golf are maintained by:" },
@@ -67,7 +67,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.playing_2",
+      "id":"http://scorm.com/golfsamples.interactions.playing_2",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "A score of two under par on a given hole is known as a(n):" },
@@ -92,7 +92,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.playing_3",
+      "id":"http://scorm.com/golfsamples.interactions.playing_3",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "A typical golf course has ____ holes" },
@@ -111,7 +111,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.playing_4",
+      "id":"http://scorm.com/golfsamples.interactions.playing_4",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "In stableford scoring, the highest score wins."},
@@ -130,7 +130,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.playing_5",
+      "id":"http://scorm.com/golfsamples.interactions.playing_5",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "Par for a 175 yard hole is typically:" },
@@ -149,7 +149,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.etiquette_1",
+      "id":"http://scorm.com/golfsamples.interactions.etiquette_1",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "When another player is attempting a shot, it is best to stand:" },
@@ -173,7 +173,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.etiquette_2",
+      "id":"http://scorm.com/golfsamples.interactions.etiquette_2",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "Generally sand trap rakes should be left outside of the hazard" },
@@ -192,7 +192,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.etiquette_3",
+      "id":"http://scorm.com/golfsamples.interactions.etiquette_3",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "The player with the best score on previous hole tees off:" },
@@ -216,7 +216,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.handicap_1",
+      "id":"http://scorm.com/golfsamples.interactions.handicap_1",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "Which formula is used to calculate the 'course handicap'?"},
@@ -240,7 +240,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.handicap_2",
+      "id":"http://scorm.com/golfsamples.interactions.handicap_2",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "Golfer A has a course handicap of 6. Golfer B has a course handicap of 10. Golfer A shoots an 81. Golfer B shoots an 84. Golfer B wins the match be how many strokes?"},
@@ -259,7 +259,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.handicap_3",
+      "id":"http://scorm.com/golfsamples.interactions.handicap_3",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "A 'scratch golfer' has a handicap of ___"},
@@ -278,7 +278,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.handicap_4",
+      "id":"http://scorm.com/golfsamples.interactions.handicap_4",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "Golfer A has a course handicap of 3. Golfer B has a course handicap of 28. On the 6th handicap hole, how many strokes will Golfer A have to give Golfer B in match play?"},
@@ -297,7 +297,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.fun_1",
+      "id":"http://scorm.com/golfsamples.interactions.fun_1",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "To make friends on the golf course, you should play really slowly." },
@@ -316,7 +316,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.fun_2",
+      "id":"http://scorm.com/golfsamples.interactions.fun_2",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "Knickers indicate a refined sense of style." },
@@ -335,7 +335,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"com.scorm.golfsamples.interactions.fun_3",
+      "id":"http://scorm.com/golfsamples.interactions.fun_3",
       "definition":{
          "type":"http://adlnet.gov/expapi/activities/cmi.interaction",
          "description": { "en-US" : "You should take your score very seriously if you want to have a lot of fun on the course." },
@@ -355,7 +355,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI",
+      "id":"http://scorm.com/GolfExample_TCAPI",
       "definition":{
          "name": { "en-US" : "Golf Example - Tin Can Course" },
          "type":"http://adlnet.gov/expapi/verbs/course",
@@ -374,7 +374,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/Playing/Par.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/Playing/Par.html"
    }
 },
 {
@@ -387,7 +387,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/Playing/Scoring.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/Playing/Scoring.html"
    }
 },
 {
@@ -400,7 +400,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/Playing/OtherScoring.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/Playing/OtherScoring.html"
    }
 },
 {
@@ -413,7 +413,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/Playing/RulesOfGolf.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/Playing/RulesOfGolf.html"
    }
 },
 {
@@ -426,7 +426,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/Etiquette/Course.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/Etiquette/Course.html"
    }
 },
 {
@@ -439,7 +439,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/Etiquette/Distracting.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/Etiquette/Distracting.html"
    }
 },
 {
@@ -452,7 +452,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/Etiquette/Play.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/Etiquette/Play.html"
    }
 },
 {
@@ -465,7 +465,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/Handicapping/Overview.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/Handicapping/Overview.html"
    }
 },
 {
@@ -478,7 +478,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/Handicapping/CalculatingHandicap.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/Handicapping/CalculatingHandicap.html"
    }
 },
 {
@@ -491,7 +491,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/Handicapping/CalculatingScore.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/Handicapping/CalculatingScore.html"
    }
 },
 {
@@ -504,7 +504,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/Handicapping/Example.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/Handicapping/Example.html"
    }
 },
 {
@@ -517,7 +517,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/HavingFun/HowToHaveFun.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/HavingFun/HowToHaveFun.html"
    }
 },
 {
@@ -530,7 +530,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/HavingFun/MakeFriends.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/HavingFun/MakeFriends.html"
    }
 },
 {
@@ -543,7 +543,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/HavingFun/HowToBeStylish.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/HavingFun/HowToBeStylish.html"
    }
 },
 {
@@ -556,7 +556,7 @@ golfStatements = [
         "display":{"en-US":"imported"}
    },
    "object":{
-      "id":"scorm.com/GolfExample_TCAPI/GolfAssessment.html"
+      "id":"http://scorm.com/GolfExample_TCAPI/GolfAssessment.html"
    }
 },
 
@@ -570,7 +570,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.fun_3"
+            "id": "http://scorm.com/golfsamples.interactions.fun_3"
         },
         "result": {
             "response": "false",
@@ -578,8 +578,8 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -593,7 +593,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.fun_2"
+            "id": "http://scorm.com/golfsamples.interactions.fun_2"
         },
         "result": {
             "response": "false",
@@ -601,8 +601,8 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -616,7 +616,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.fun_1"
+            "id": "http://scorm.com/golfsamples.interactions.fun_1"
         },
         "result": {
             "response": "false",
@@ -624,8 +624,8 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -639,7 +639,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.handicap_4"
+            "id": "http://scorm.com/golfsamples.interactions.handicap_4"
         },
         "result": {
             "response": "2",
@@ -647,8 +647,8 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -662,7 +662,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.handicap_3"
+            "id": "http://scorm.com/golfsamples.interactions.handicap_3"
         },
         "result": {
             "response": "0",
@@ -670,8 +670,8 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -685,7 +685,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.handicap_2"
+            "id": "http://scorm.com/golfsamples.interactions.handicap_2"
         },
         "result": {
             "response": "1",
@@ -693,8 +693,8 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -708,7 +708,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.handicap_1"
+            "id": "http://scorm.com/golfsamples.interactions.handicap_1"
         },
         "result": {
             "response": "choice_3",
@@ -716,8 +716,8 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -731,7 +731,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.etiquette_3"
+            "id": "http://scorm.com/golfsamples.interactions.etiquette_3"
         },
         "result": {
             "response": "first",
@@ -739,8 +739,8 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -754,7 +754,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.etiquette_2"
+            "id": "http://scorm.com/golfsamples.interactions.etiquette_2"
         },
         "result": {
             "response": "true",
@@ -762,8 +762,8 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -777,7 +777,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.etiquette_1"
+            "id": "http://scorm.com/golfsamples.interactions.etiquette_1"
         },
         "result": {
             "response": "out_of_sight",
@@ -785,8 +785,8 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -800,7 +800,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.playing_5"
+            "id": "http://scorm.com/golfsamples.interactions.playing_5"
         },
         "result": {
             "response": "3",
@@ -808,8 +808,8 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -823,7 +823,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.playing_4"
+            "id": "http://scorm.com/golfsamples.interactions.playing_4"
         },
         "result": {
             "response": "true",
@@ -831,8 +831,8 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -846,7 +846,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.playing_3"
+            "id": "http://scorm.com/golfsamples.interactions.playing_3"
         },
         "result": {
             "response": "18",
@@ -854,8 +854,8 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -869,7 +869,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.playing_2"
+            "id": "http://scorm.com/golfsamples.interactions.playing_2"
         },
         "result": {
             "response": "eagle",
@@ -877,7 +877,7 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" }
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" }
             }
         }
     },
@@ -891,7 +891,7 @@ golfStatements = [
              "display":{"en-US":"answered"}
         },
         "object": {
-            "id": "com.scorm.golfsamples.interactions.playing_1"
+            "id": "http://scorm.com/golfsamples.interactions.playing_1"
         },
         "result": {
             "response": "USGA",
@@ -899,9 +899,9 @@ golfStatements = [
         },
         "context":{
             "contextActivities": {
-                "parent": { "id": "scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
-                "grouping": { "id": "scorm.com/GolfExample_TCAPI" },
-                "other": {"id":"com.scorm.golfsamples.context_other"}
+                "parent": { "id": "http://scorm.com/GolfExample_TCAPI/GolfAssessment.html" },
+                "grouping": { "id": "http://scorm.com/GolfExample_TCAPI" },
+                "other": {"id":"http://scorm.com/golfsamples.context_other"}
             }
         }
     }

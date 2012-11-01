@@ -76,7 +76,7 @@ asyncTest('PUT / GET w/ Extensions', function() {
         context: {
             registration: myRegId,
             extensions: {
-                ctx_extension_1: 1234
+                "http://scorm.com/extensions/ctx_extension_1": 1234
             }
         },
         result: {
@@ -84,7 +84,7 @@ asyncTest('PUT / GET w/ Extensions', function() {
             success: true,
             completion: true,
             extensions: {
-                extension_1: "some value"
+                "http://scorm.com/extensions/extension_1": "some value"
             }
         }
     };
@@ -253,7 +253,7 @@ asyncTest('Interaction Components', function() {
     "use strict";
     var env = statementsEnv;
 
-    var activity = { id: "scorm.com/interaction_definition_test_" + env.util.ruuid() };
+    var activity = { id: "http://scorm.com/interaction_definition_test_" + env.util.ruuid() };
 
     var components = [
         {id: "1", description:{"en-US": "Interaction Component #1"}},
@@ -688,7 +688,7 @@ asyncTest('GET, sparse == false', function () {
     var actor = env.statement.actor;
 
     var regId = env.util.ruuid();
-    var myActivityId = env.util.ruuid();
+    var myActivityId = "http://scorm.com/activities/" + env.util.ruuid();
     var myActivityFull = { "id":myActivityId, "definition":{"name": { "en-US" : "My Tezzzt Activity"} } };
     var myActivitySparse = { "id":myActivityId };
     var statement1 = { 
@@ -809,15 +809,15 @@ asyncTest('Statements, context activities filter', function () {
 	var util = env.util;
 	var url = '/statements';
 
-	var testActivity = { id: 'com.scorm.golfsamples.interactions.playing_1'};
+	var testActivity = { id: 'http://scorm.com/golfsamples.interactions.playing_1'};
 
-	var groupingId = 'scorm.com/GolfExample_TCAPI';
+	var groupingId = 'http://scorm.com/GolfExample_TCAPI';
 	var groupingFilter = encodeURIComponent(JSON.stringify({id : groupingId}));
 
-    var parentId = 'scorm.com/GolfExample_TCAPI/GolfAssessment.html';
+    var parentId = 'http://scorm.com/GolfExample_TCAPI/GolfAssessment.html';
     var parentFilter = encodeURIComponent(JSON.stringify({id : parentId}));
 
-    var otherId = "com.scorm.golfsamples.context_other";
+    var otherId = "http://scorm.com/golfsamples.context_other";
     var otherFilter = encodeURIComponent(JSON.stringify({id : otherId}));
 
 	// add statement to find
@@ -1019,9 +1019,27 @@ asyncTest('statement validation', function () {
             });
         },
         function(cb){
+            //Verb with no ID
+            var stmtCopy = JSON.parse(statementJson);
+            stmtCopy.verb = {};
+            assertBadStatement(stmtCopy, cb);
+        },
+        function(cb){
+            //Verb with invalid ID
+            var stmtCopy = JSON.parse(statementJson);
+            stmtCopy.verb.id = "crappy";
+            assertBadStatement(stmtCopy, cb);
+        },
+        function(cb){
             //Activity with no ID
             var stmtCopy = JSON.parse(statementJson);
             stmtCopy.object = {"objectType":"Activity"};
+            assertBadStatement(stmtCopy, cb);
+        },
+        function(cb){
+            //Activity with invalid ID
+            var stmtCopy = JSON.parse(statementJson);
+            stmtCopy.object.id = "crappy";
             assertBadStatement(stmtCopy, cb);
         },
         function(cb){
@@ -1039,13 +1057,24 @@ asyncTest('statement validation', function () {
         function(cb){
             //Bad date time
             var stmtCopy = JSON.parse(statementJson);
-            stmtCopy.timestamp='trash';
+            stmtCopy.timestamp = 'trash';
             assertBadStatement(stmtCopy, cb);
+        },
+        function(cb){
+            //Bad extension name
+            var stmtCopy = JSON.parse(statementJson);
+            stmtCopy.context = {
+                "extensions": {
+                    "crappyId": "because it is not a URI"
+                }
+            };
+            assertBadStatement(stmtCopy, cb);
+            
         },
         function(cb){
             //Unknown field
             var stmtCopy = JSON.parse(statementJson);
-            stmtCopy.trash='trash';
+            stmtCopy.trash = 'trash';
             assertBadStatement(stmtCopy, cb);
         },
         //Start up the next test
