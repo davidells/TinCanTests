@@ -753,7 +753,7 @@ function verifyGolfDescendants(callback) {
 	});
 }
 
-// verify LRS can handle all supported actor types (agent & group)
+// general broad test to verify LRS can handle supported actor types (agent & group)
 asyncTest('ActorTypes', function() {
     var env = statementsEnv;
     var myStatementId = env.util.ruuid();
@@ -798,6 +798,45 @@ asyncTest('ActorTypes', function() {
 		env.util.request('GET', url, null, true, 200, 'OK', function (xhr) {
 			env.util.validateStatement(xhr.responseText, myStatement, myStatementId);
 			start();
+		});
+	});
+        
+});
+
+//verify ad-hoc group support
+asyncTest('ActorTypes: Ad-Hoc Group', function() {
+    var env = statementsEnv;
+    var myStatementId = env.util.ruuid();
+    var url = '/statements?statementId=' + myStatementId;
+    var myStatement = {
+    	id: myStatementId,
+        actor: {
+            objectType: "Group",
+            name: "Test Group",
+            member: [
+                { 
+                  objectType:"Agent",
+                  mbox: "mailto:auto_tests_agent@example.scorm.com",
+    	          name: "Test Agent" 
+                }
+            ]
+        },
+        verb: env.util.getADLVerb("attempted"),
+        object: env.statement.object
+    };
+
+    //Make sure good ad-hoc group is stored and fetched as intended
+	env.util.request('PUT', url, JSON.stringify(myStatement), true, 204, 'No Content', function () {
+		env.util.request('GET', url, null, true, 200, 'OK', function (xhr) {
+			env.util.validateStatement(xhr.responseText, myStatement, myStatementId);
+			
+			//Make sure a crappy ad-hoc group is rejected
+			delete myStatement.actor.member;
+			myStatement.id = env.util.ruuid();
+			url = '/statements?statementId=' + myStatement.id;
+			env.util.request('PUT', url, JSON.stringify(myStatement), true, 400, 'Bad Request', function () {
+				start();
+			});
 		});
 	});
         
