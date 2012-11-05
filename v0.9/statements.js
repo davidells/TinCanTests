@@ -340,8 +340,6 @@ asyncTest('Reject Bad Verb', function () {
 
 	statement.verb = 'not a valid verb';
 	util.request('PUT', url, JSON.stringify(statement), true, 400, 'Bad Request', function (xhr, usingIEMode) {
-		// should return an error message, can't validatate content, but make sure it's there
-        util.log("bad verb response: " + xhr.responseText);
         if(!usingIEMode){
 		    ok(xhr.responseText !== null && xhr.responseText.length > 0, "Message returned");
         }

@@ -247,9 +247,6 @@ Util.prototype.request = function (method, url, data, useAuth, expectedStatus, e
     if(extraHeaders === undefined || extraHeaders['Content-Type'] === undefined){
         headers["Content-Type"] = contentType;
     }
-    if(contentLength > 0){
-        headers["Content-Length"] = contentLength;
-    }
     if (useAuth) {
     	if (window.location.href.indexOf('auth=') > -1) {
     		useAuth = JSON.parse(this.parseQueryString(window.location.href.substring(window.location.href.indexOf('?') + 1)).auth);
