@@ -12,13 +12,17 @@ module('Statements', {
 asyncTest('empty statement PUT', function () {
 	// empty statement should fail w/o crashing the LRS (error response shoudl be received)
 	"use strict";
-	statementsEnv.util.request('PUT', '/statements?statementId=' + statementsEnv.id, null, true, 400, 'Bad Request', start);
+	statementsEnv.util.request(
+        'PUT', '/statements?statementId=' + statementsEnv.id, null, 
+        true, 400, 'Bad Request', function(){ start(); });
 });
 
 asyncTest('empty statement POST', function () {
 	// empty statement should fail w/o crashing the LRS (error response shoudl be received)
 	"use strict";
-	statementsEnv.util.request('POST', '/statements/', null, true, 400, 'Bad Request', start);
+	statementsEnv.util.request(
+        'POST', '/statements/', null, 
+        true, 400, 'Bad Request', function(){ start(); });
 });
 
 asyncTest('PUT / GET', function () {
@@ -299,7 +303,7 @@ asyncTest('Interaction Components', function() {
         function(cb){ checkComponentSet("sequencing", "choices", true, cb); },
 
         //Start the test runner again
-        start
+        function(cb){ start(); }
     ]);
 });
 
@@ -505,8 +509,9 @@ function continueTokenTest(ascending){
             }
             cb(null);
         },
+
         //Start the test runner again...
-        start
+        function(cb){ start(); }
     ]);
 
 }
@@ -674,8 +679,9 @@ asyncTest('GET, verb filter', function () {
 		        	cb(null);
 		        });
         },
+
         //Start up the test runner again...
-        start
+        function(cb){ start(); }
 	]);
 });
 
@@ -891,8 +897,9 @@ asyncTest('Statements, context activities filter', function () {
                     cb(null);
                 });
         },
+
         //Start the next test
-        start,
+        function(cb){ start(); }
     ]);
 });
 
@@ -959,8 +966,9 @@ asyncTest('voiding statements', function () {
             //Voiding a voiding statement should fail
             issueVoidingStatement(util.ruuid(), voidingStatementId, 400, 'Bad Request', cb); 
         },
+
         //Start up the next test
-        start
+        function(cb){ start(); }
     ]);
 });
 
@@ -1075,8 +1083,9 @@ asyncTest('statement validation', function () {
             stmtCopy.trash = 'trash';
             assertBadStatement(stmtCopy, cb);
         },
+
         //Start up the next test
-        start
+        function(cb){ start(); }
     ]);
 });
 
@@ -1124,8 +1133,9 @@ asyncTest('SubStatements', function () {
             //Good sub statement
 	        util.request('PUT', url, statementJson, true, 204, 'No Content', function(){ cb(null); });
         },
+
         //Start up the next test
-        start
+        function(cb){ start(); }
     ]);
 });
 

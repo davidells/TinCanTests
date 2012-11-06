@@ -12,13 +12,13 @@ module('Statements', {
 asyncTest('empty statement PUT', function () {
 	// empty statement should fail w/o crashing the LRS (error response shoudl be received)
 	"use strict";
-	statementsEnv.util.request('PUT', '/statements?statementId=' + statementsEnv.id, null, true, 400, 'Bad Request', start);
+	statementsEnv.util.request('PUT', '/statements?statementId=' + statementsEnv.id, null, true, 400, 'Bad Request', function(){start();});
 });
 
 asyncTest('empty statement POST', function () {
 	// empty statement should fail w/o crashing the LRS (error response shoudl be received)
 	"use strict";
-	statementsEnv.util.request('POST', '/statements/', null, true, 400, 'Bad Request', start);
+	statementsEnv.util.request('POST', '/statements/', null, true, 400, 'Bad Request', function(){start();});
 });
 
 asyncTest('PUT / GET', function () {
@@ -230,6 +230,7 @@ asyncTest('Actor Transitive equalilty', function () {
 		modStatements, prop, ids, resultIds = [], resultStatements, ii, account, mbox1, mbox2;
 
     if(Config !== undefined && Config.testActorMerging !== true){
+        expect(0);
         start();
         return;
     }
@@ -281,6 +282,7 @@ asyncTest('Actor Transitive equalilty, multi-post', function () {
 		modStatements, prop, ids, resultIds = [], resultStatements, ii, account, mbox1, mbox2;
 		
     if(Config !== undefined && Config.testActorMerging !== true){
+        expect(0);
         start();
         return;
     }
@@ -439,7 +441,7 @@ asyncTest('Interaction Components', function() {
         function(cb){ checkComponentSet("sequencing", "choices", true, cb); },
 
         //Start the test runner again
-        start
+        function(cb){ start(); }
     ]);
 });
 
@@ -705,7 +707,7 @@ function continueTokenTest(ascending){
             cb(null);
         },
         //Start the test runner again...
-        start
+        function(){ start(); }
     ]);
 
 }
@@ -870,8 +872,9 @@ asyncTest('GET, verb filter', function () {
 		        	cb(null);
 		        });
         },
+
         //Start up the test runner again...
-        start
+        function(cb){ start(); }
 	]);
 });
 
@@ -1063,8 +1066,9 @@ asyncTest('Statements, context activities filter', function () {
                     cb(null);
                 });
         },
+
         //Start the next test
-        start,
+        function(){ start(); }
     ]);
 });
 
@@ -1131,8 +1135,9 @@ asyncTest('voiding statements', function () {
             //Voiding a voiding statement should fail
             issueVoidingStatement(util.ruuid(), voidingStatementId, 400, 'Bad Request', cb); 
         },
+
         //Start up the next test
-        start
+        function(cb){ start(); }
     ]);
 });
 
@@ -1226,105 +1231,6 @@ asyncTest('statement validation', function () {
             assertBadStatement(stmtCopy, cb);
         },
         //Start up the next test
-        start
+        function(cb){ start(); }
     ]);
 });
-
-
-/*asyncTest('Statements, descendants filter', function () {
-	"use strict";
-	var env = statementsEnv,
-		util = env.util,
-		url = '/statements',
-		statement,
-		testActivity = { id: 'com.scorm.golfsamples.interactions.playing_1'},
-		ancestorId = 'scorm.com/GolfExample_TCAPI',
-		ancestorFilter = encodeURIComponent(JSON.stringify({id : ancestorId}));
-
-	// add statement to find
-	statement = util.clone(getGolfStatement(testActivity.id));
-	statement.id = util.ruuid();
-	statement.context.registration = statement.id;
-
-	//?limit=1&activity=' + encodeURIComponent(JSON.stringify(testActivity))
-	// statement not found by ancestor w/o using 'descendant' flag
-	util.request('POST', url, JSON.stringify(golfStatements), true, 200, 'OK', function (xhr) {
-	    util.request('PUT', url + "?statementId=" + statement.id, JSON.stringify(statement, null, 4), true, 204, 'No Content', function () {
-	    	util.request('GET', url + '?registration=' + statement.context.registration + '&object=' + ancestorFilter, null, true, 200, 'OK', function (xhr) {
-	    		equal(JSON.parse(xhr.responseText).length, 0, 'response, find by ancestor no descendants flag');
-	    		util.request('GET', url + '?registration=' + statement.context.registration + '&descendants=true&object=' + ancestorFilter, null, true, 200, 'OK', function (xhr) {
-	    			var resultStatements = util.tryJSONParse(xhr.responseText),
-	    				resultStatement = resultStatements[0];
-	    			if (resultStatement === undefined) {
-	    				ok(false, 'statement not found using descendant filter');
-	    			} else {
-	    				equal(resultStatement.id, statement.id, 'correct statement found using descendant filter');
-	    			}
-	    			start();
-	    		});
-	    	});
-	    });
-    });
-
-	/*util.request('POST', url, 'limit=10', true, 200, 'OK', function (xhr) {
-		var statements = util.tryJSONParse(xhr.responseText),
-			statement,
-			filters = {},
-			prop,
-			queryString = [];
-
-		if (statements.length === 10) {
-			// pick a statement with statements stored before & after
-			statement = statements[5];
-
-			// add filters which match the selected statement
-			filters.since = (new Date(new Date(statement.stored).getTime() - 1)).toString();
-			filters.until = statement.stored;
-			filters.verb = statement.verb;
-			filters.object = JSON.stringify(statement.object, null, 4);
-			if (statement.registration !== undefined) {
-				filters.registration = statement.registraiton;
-			}
-			filters.actor = JSON.stringify(statement.actor, null, 4);
-
-			for (prop in filters) {
-				if (filters.hasOwnProperty(prop)) {
-					queryString.push(prop + '=' + encodeURIComponent(filters[prop]));
-				}
-			}
-
-			util.request('GET', url + statement.id, null, true, 200, 'OK', function (xhr) {
-				var results = util.tryJSONParse(xhr.responseText),
-					ii,
-					found = false;
-
-				results = [results];
-
-				for (ii = 0; ii < results.length; ii++) {
-					if (results[ii].id === statement.id) {
-						found = true;
-					}
-					equal(results[ii].stored, statement.stored, 'stored');
-					equal(results[ii].verb, statement.verb, 'verb');
-					if (statement.object.id !== undefined) {
-						// object is an activity
-						equal(results[ii].object.id, statement.object.id, 'object');
-					} else {
-						// object is an actor
-						ok(util.areActorsEqual(results[ii].object, statement.object), 'object');
-					}
-					if (statement.registration !== undefined) {
-						equal(results[ii].registration, statement.registration, 'registration');
-					}
-					// actor comparison
-					ok(util.areActorsEqual(results[ii].actor, statement.actor), 'actor');
-				}
-				ok(found, 'find statement filters based on');
-				start();
-			});
-		} else {
-			ok(false, 'Test requires at least 10 existing statements');
-			start();
-		}
-	});*/
-/*});*/
