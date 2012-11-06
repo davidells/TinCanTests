@@ -10,6 +10,8 @@
 	<script type="text/javascript" src="../common/base64.js"></script>
 	<script type="text/javascript" src="../common/2.5.3-crypto-sha1.js"></script>
 	<script type="text/javascript" src="../common/qunit-1.10.0.js"></script>
+	<script type="text/javascript" src="../common/qunit-junit-logger.js"></script>
+	<script type="text/javascript" src="../common/junit.js"></script>
 	<script type="text/javascript" src="../common/async.js"></script>
 	<script type="text/javascript" src="util.js"></script>
 	<script type="text/javascript" src="golf_statements.js"></script>
@@ -19,6 +21,11 @@
 	<script type="text/javascript" src="actors.js"></script>
     <script type="text/javascript">
         QUnit.config.reorder = false;
+
+        //Print jUnit style XML when we're done
+	    QUnit.jUnitReport = function(data) {
+	    	console.log(data.xml);
+	    };
     </script>
 </head>
 <body>
