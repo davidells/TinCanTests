@@ -12,9 +12,9 @@
         </copy>
     </target>
 
-    <target name="test" depends="v09-tests, v095-tests" />
+    <target name="run-tests" depends="run-v09-tests, run-v095-tests" />
 
-    <target name="v09-tests">
+    <target name="run-v09-tests">
         <echo message="Running v0.9 TinCan tests at ${tincan.tests.root}/v0.9/tests.html" />
 
         <exec executable="${phantomjs.cmd}" failonerror="true" output="${v09.results.xml}">
@@ -23,7 +23,7 @@
         </exec>
     </target>
 
-    <target name="v095-tests">
+    <target name="run-v095-tests">
         <echo message="Running v0.95 TinCan tests at ${tincan.tests.root}/v0.95/tests.html" />
 
         <exec executable="${phantomjs.cmd}" failonerror="true" output="${v095.results.xml}">
