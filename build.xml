@@ -1,0 +1,25 @@
+<project name="TinCanTests">
+    <property file="local.build.properties"/>
+    <property file="build.properties"/>
+
+    <target name="test" depends="v09-tests, v095-tests" />
+
+    <target name="v09-tests">
+        <echo message="Running v0.9 TinCan tests at ${tincan.tests.root}/v0.9/tests.html" />
+
+        <exec executable="${phantomjs.cmd}" failonerror="true" output="${v09.results.xml}">
+            <arg value="${basedir}/common/phantomjs-run-qunit.js"/>
+            <arg value="${tincan.tests.root}/v0.9/tests.html"/>
+        </exec>
+    </target>
+
+    <target name="v095-tests">
+        <echo message="Running v0.95 TinCan tests at ${tincan.tests.root}/v0.95/tests.html" />
+
+        <exec executable="${phantomjs.cmd}" failonerror="true" output="${v095.results.xml}">
+            <arg value="${basedir}/common/phantomjs-run-qunit.js"/>
+            <arg value="${tincan.tests.root}/v0.95/tests.html"/>
+        </exec>
+    </target>
+
+</project>
