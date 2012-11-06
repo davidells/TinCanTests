@@ -441,7 +441,6 @@ Util.prototype.getMultipleTest = function (env, url, idParamName) {
 
         //Get time, set it in timestamp
 	    function(cb){
-            console.log('getServerTime');
 		    env.util.getServerTime(null, 
                 function(err, stamp) { 
                     timestamp = stamp;
