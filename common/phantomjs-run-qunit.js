@@ -57,7 +57,7 @@ page.open(system.args[1], function(status){
             function(){
                 return page.evaluate(function(){
                     var el = document.getElementById('qunit-banner');
-                    if (el && el.className.match('qunit-pass')) {
+                    if (el && el.className.match('qunit-pass|qunit-fail')) {
                         return true;
                     }
                     return false;
