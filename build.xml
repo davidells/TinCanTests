@@ -2,6 +2,16 @@
     <property file="local.build.properties"/>
     <property file="build.properties"/>
 
+    <target name="configure">
+        <copy file="${basedir}/config.js.template" toFile="${basedir}/config.js" overwrite="true">
+            <filterset begintoken="[" endtoken="]">
+                <filter token="endpoint" value="${tcapi.endpoint}" />
+                <filter token="username" value="${tcapi.username}" />
+                <filter token="password" value="${tcapi.password}" />
+            </filterset>
+        </copy>
+    </target>
+
     <target name="test" depends="v09-tests, v095-tests" />
 
     <target name="v09-tests">
