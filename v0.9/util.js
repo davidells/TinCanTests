@@ -424,33 +424,63 @@ Util.prototype.validateStatement = function (responseText, statement, id) {
 Util.prototype.getMultipleTest = function (env, url, idParamName) {
 	"use strict";
 	var testText = 'test test text : ' + env.id,
+        timestamp = null,
 		urlKey;
 
     var sep = (url.indexOf('?') == -1 ? '?' : '&');
 	urlKey = url + sep + idParamName + '=' + encodeURIComponent(env.id);
 
-	env.util.request('PUT', urlKey + '[1]', testText, true, 204, 'No Content', function () {
-		env.util.getServerTime(null, function (error, timestamp) {
-			env.util.request('PUT', urlKey + '[2]', testText, true, 204, 'No Content', function () {
-				url += '&since=' + encodeURIComponent(timestamp.toString());
-				env.util.request('GET', url, null, true, 200, 'OK', function (xhr) {
-					var ii, keys, found1, found2;
-					keys = env.util.tryJSONParse(xhr.responseText);
-					found1 = found2 = false;
-					for (ii = 0; ii < keys.length; ii++) {
-						if (keys[ii] === env.id + '[1]') {
-							found1 = true;
-						} else if (keys[ii] === env.id + '[2]') {
-							found2 = true;
-						}
+    async.waterfall([
+        //Set first state
+	    function(cb){
+            env.util.request('PUT', urlKey + '[1]', testText, true, 204, 'No Content', function(){ cb(null); });
+        },
+
+        //Brief Pause
+        function(cb){ setTimeout(function(){ cb(null); }, 100); },
+
+        //Get time, set it in timestamp
+	    function(cb){
+            console.log('getServerTime');
+		    env.util.getServerTime(null, 
+                function(err, stamp) { 
+                    timestamp = stamp;
+                    cb(null);
+                }
+            );
+        },
+
+        //Brief Pause
+        function(cb){ setTimeout(function(){ cb(null); }, 100); },
+
+        //Set second state
+        function(cb){
+			env.util.request('PUT', urlKey + '[2]', testText, true, 204, 'No Content', function(){ cb(null); });
+        },
+
+        //Make sure since works
+        function(cb){
+			url += '&since=' + encodeURIComponent(timestamp.toString());
+			env.util.request('GET', url, null, true, 200, 'OK', function (xhr) {
+				var ii, keys, found1, found2;
+				keys = env.util.tryJSONParse(xhr.responseText);
+				found1 = found2 = false;
+				for (ii = 0; ii < keys.length; ii++) {
+					if (keys[ii] === env.id + '[1]') {
+						found1 = true;
+					} else if (keys[ii] === env.id + '[2]') {
+						found2 = true;
 					}
-					ok(found2, 'Key added after timestamp returned');
-					ok(!found1, 'Key added before timestamp not returned');
-					start();
-				});
+				}
+				ok(found2, 'Key added after timestamp returned');
+				ok(!found1, 'Key added before timestamp not returned');
+				cb(null);
 			});
-		});
-	});
+		},
+
+        //Go on to the next test
+        function(cb){ start(); }
+    ]);
 };
 
 // get the server time, based on when the statement with the specified ID was stored.

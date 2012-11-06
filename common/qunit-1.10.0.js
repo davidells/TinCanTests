@@ -362,6 +362,7 @@ QUnit = {
 	start: function( count ) {
 		config.semaphore -= count || 1;
 		// don't start until equal number of stop-calls
+        //console.log("start: " + config.semaphore);
 		if ( config.semaphore > 0 ) {
 			return;
 		}
@@ -390,6 +391,7 @@ QUnit = {
 
 	stop: function( count ) {
 		config.semaphore += count || 1;
+        //console.log("stop: " + config.semaphore);
 		config.blocking = true;
 
 		if ( config.testTimeout && defined.setTimeout ) {
