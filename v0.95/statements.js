@@ -1139,3 +1139,43 @@ asyncTest('SubStatements', function () {
     ]);
 });
 
+asyncTest('timestamp', function(){
+	"use strict";
+	var env = statementsEnv,
+        util = env.util,
+        statement = util.clone(env.statement),
+        url;
+
+    statement.id = util.ruuid();
+    url = '/statements?statementId=' + statement.id;
+
+    async.waterfall([
+        function(cb){
+            //Make sure timestamp is set when not provided
+            util.request('PUT', url, JSON.stringify(statement), true, 204, 'No Content', function(){ 
+                util.request('GET', url, null, true, 200, 'OK', function(xhr){ 
+                    var result = JSON.parse(xhr.responseText);
+                    ok(result.timestamp !== undefined && result.timestamp !== null, "timestamp set by LRS");
+                    cb();
+                });
+            });
+        },
+        function(cb){
+            //Make sure timestamp sent is respected
+            var timestamp = util.ISODateString(new Date());
+            statement.id = util.ruuid();
+            statement.timestamp = timestamp;
+            url = '/statements?statementId=' + statement.id;
+            util.request('PUT', url, JSON.stringify(statement), true, 204, 'No Content', function(){ 
+                util.request('GET', url, null, true, 200, 'OK', function(xhr){ 
+                    var result = JSON.parse(xhr.responseText);
+                    equal(result.timestamp, timestamp, "timestamp sent matches received");
+                    cb();
+                });
+            });
+        },
+        //Start up the next test
+        function(cb){ start(); }
+    ]);
+    
+});
