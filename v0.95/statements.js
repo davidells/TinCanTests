@@ -1156,6 +1156,7 @@ asyncTest('timestamp', function(){
                 util.request('GET', url, null, true, 200, 'OK', function(xhr){ 
                     var result = JSON.parse(xhr.responseText);
                     ok(result.timestamp !== undefined && result.timestamp !== null, "timestamp set by LRS");
+                    equal(result.timestamp, result.stored, "LRS set timestamp matches stored date");
                     cb();
                 });
             });
