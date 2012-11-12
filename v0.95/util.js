@@ -212,7 +212,7 @@ Util.prototype.request = function (method, url, data, useAuth, expectedStatus, e
 		actorKey = this.actor;
 	}
 	url = url.replace('<activity ID>', encodeURIComponent(this.activity.id));
-	url = url.replace('<actor>', encodeURIComponent(JSON.stringify(actorKey)));
+	url = url.replace('<agent>', encodeURIComponent(JSON.stringify(actorKey)));
 
 
     //Stop if we get data but can't send it

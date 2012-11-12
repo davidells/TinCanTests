@@ -12,14 +12,14 @@ module('Actors', {
 //PUT | GET | DELETE http://example.com/TCAPI/agents/<actor>/profile/<profile object key>
 asyncTest('Profile', function () {
 	"use strict";
-	actorEnv.util.putGetDeleteStateTest(actorEnv, '/agents/profile?actor=<actor>');
+	actorEnv.util.putGetDeleteStateTest(actorEnv, '/agents/profile?agent=<agent>');
 });
 
-//GET http://example.com/TCAPI/agents/<actor>
+//GET http://example.com/TCAPI/agents/<agent>
 asyncTest('Definition', function () {
 	"use strict";
 	var env = actorEnv,
-		url = '/agents?actor=<actor>';
+		url = '/agents?agent=<agent>';
 
 	env.util.request('GET', url, null, true, 200, 'OK', function (xhr) {
 		equal(env.util.tryJSONParse(xhr.responseText).mbox[0], env.util.actor.mbox, 'actor mbox');
@@ -27,15 +27,15 @@ asyncTest('Definition', function () {
 	});
 });
 
-//GET http://example.com/TCAPI/agents/<actor>/profile[?since=<timestamp>]
+//GET http://example.com/TCAPI/agents/<agent>/profile[?since=<timestamp>]
 asyncTest('Profile, multiple', function () {
 	"use strict";
-	actorEnv.util.getMultipleTest(actorEnv, '/agents/profile?actor=<actor>','profileId');
+	actorEnv.util.getMultipleTest(actorEnv, '/agents/profile?agent=<agent>','profileId');
 });
 
 asyncTest('Profile, Concurrency Rules', function(){
     "use strict";
     var env = actorEnv;
-    var url = "/agents/profile?actor=<actor>&profileId=" + env.util.ruuid();
+    var url = "/agents/profile?agent=<agent>&profileId=" + env.util.ruuid();
     env.util.concurrencyRulesTest(env, url, true);
 });

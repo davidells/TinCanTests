@@ -9,20 +9,20 @@ module('State', {
 	}
 });
 
-/*PUT | GET | DELETE http://example.com/TCAPI/activities/<activity ID>/state/<actor>/<State ID>[?registration=<registration>]
+/*PUT | GET | DELETE http://example.com/TCAPI/activities/<activity ID>/state/<agent>/<State ID>[?registration=<registration>]
 
-Stores, fetches, or deletes the specified state document in the context of the specified activity, actor, and registration (if specified). Actor may be an individual or a team.
+Stores, fetches, or deletes the specified state document in the context of the specified activity, agent, and registration (if specified). Actor may be an individual or a team.
 
-DELETE http://example.com/TCAPI/activities/<activity ID>/state/<actor>[/?registration=<registration>]
+DELETE http://example.com/TCAPI/activities/<activity ID>/state/<agent>[/?registration=<registration>]
 
-Deletes all state data for this context (activity + actor [+ registration if specified]).
+Deletes all state data for this context (activity + agent [+ registration if specified]).
 
-GET http://example.com/TCAPI/activities/<activity ID>/state/<actor>[/<registration][?since=<timestamp>]
+GET http://example.com/TCAPI/activities/<activity ID>/state/<agent>[/<registration][?since=<timestamp>]
 */
 
 function putGetStateTest(env, useRegistration) {
 	"use strict";
-	var url = '/activities/state?activityId=<activity ID>&actor=<actor>&stateId=' + env.id,
+	var url = '/activities/state?activityId=<activity ID>&agent=<agent>&stateId=' + env.id,
 		reg = '',
 		wrongReg = '',
 		stateText = 'state test text : ' + env.id;
@@ -52,7 +52,7 @@ function putGetStateTest(env, useRegistration) {
 function clearStateTest(env, useRegistration) {
 	"use strict";
 	var reg = '',
-		url = '/activities/state?activityId=<activity ID>&actor=<actor>',
+		url = '/activities/state?activityId=<activity ID>&agent=<agent>',
 		urlKey = url + '&stateId=' + env.id,
 		stateText = 'state test text : ' + env.id;
 
@@ -84,18 +84,18 @@ asyncTest('clear state', function () { "use strict"; clearStateTest(stateEnv, fa
 asyncTest('clear state (registration)', function () { "use strict"; clearStateTest(stateEnv, true); });
 asyncTest('GET multiple state keys', function () {
 	"use strict";
-	stateEnv.util.getMultipleTest(stateEnv, '/activities/state?activityId=<activity ID>&actor=<actor>','stateId');
+	stateEnv.util.getMultipleTest(stateEnv, '/activities/state?activityId=<activity ID>&agent=<agent>','stateId');
 });
 
 asyncTest('GET multiple state keys (with registration)', function () {
 	"use strict";
-	stateEnv.util.getMultipleTest(stateEnv, '/activities/state?activityId=<activity ID>&actor=<actor>&registration=autoTestReg1','stateId' );
+	stateEnv.util.getMultipleTest(stateEnv, '/activities/state?activityId=<activity ID>&agent=<agent>&registration=autoTestReg1','stateId' );
 });
 
 asyncTest('Concurrency Rules', function(){
     "use strict";
     var env = stateEnv;
-    var url = "/activities/state?activityId=<activity ID>&actor=<actor>&stateId=" + env.util.ruuid();
+    var url = "/activities/state?activityId=<activity ID>&agent=<agent>&stateId=" + env.util.ruuid();
     env.util.concurrencyRulesTest(env, url, false);
 });
 
@@ -104,7 +104,7 @@ asyncTest('missing State id', function() {
 
     var env = stateEnv;
 	var reg = '',
-		url = '/activities/state?activityId=<activity ID>&actor=<actor>',
+		url = '/activities/state?activityId=<activity ID>&agent=<agent>',
 		urlKey = url + '&stateBadid=' + env.id,
 		stateText = 'state test text : ' + env.id;
 
