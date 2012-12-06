@@ -180,14 +180,20 @@ Util.prototype.requestWithHeaders = function (method, url, headers, data, useAut
 Util.prototype.request = function (method, url, data, useAuth, expectedStatus, expectedStatusText, callback, extraHeaders, retries) {
 	"use strict";
 
-	if (this.endpoint.substring(this.endpoint.length-1) === "/") {
-		if (url.indexOf("/") === 0) {
-			url = url.substring(1); // remove redundant '/'
-		}
-	}  else if (url.indexOf("/") !== 0) {
-		// add missing '/'
-		url = "/" + url;
-	}
+    var isAbsoluteUrl = (url.indexOf("http") == 0);
+
+    //If the url is not an absolute URL, make it one
+    if (!isAbsoluteUrl) {
+	    if (this.endpoint.substring(this.endpoint.length-1) === "/") {
+	    	if (url.indexOf("/") === 0) {
+	    		url = url.substring(1); // remove redundant '/'
+	    	}
+	    }  else if (url.indexOf("/") !== 0) {
+	    	// add missing '/'
+	    	url = "/" + url;
+	    }
+        url = this.endpoint + url;
+    }
 
     //Fill in some stock params if we need to
     var actorKey = null;
@@ -260,7 +266,7 @@ Util.prototype.request = function (method, url, data, useAuth, expectedStatus, e
 
         //All requests in this mode are POST
         var xdr = new XDomainRequest();
-        xdr.open(ieModeRequest.method, this.oAuthSign(this.endpoint + ieModeRequest.url, "post", ieModeRequest.data, useAuth));
+        xdr.open(ieModeRequest.method, this.oAuthSign(ieModeRequest.url, "post", ieModeRequest.data, useAuth));
 
         //Setup callbacks
 	    xdr.onload = function () {
@@ -298,9 +304,9 @@ Util.prototype.request = function (method, url, data, useAuth, expectedStatus, e
 	    var xhr = new XMLHttpRequest();
 
 		if (forceIE) {
-			xhr.open("post", this.oAuthSign(this.endpoint + ieModeRequest.url, "post", ieModeRequest.data, useAuth), true);
+			xhr.open("post", this.oAuthSign(ieModeRequest.url, "post", ieModeRequest.data, useAuth), true);
 		} else {
-		    xhr.open(method, this.oAuthSign(this.endpoint + url, method, formData ? data : "", useAuth), true);
+		    xhr.open(method, this.oAuthSign(url, method, formData ? data : "", useAuth), true);
 		}
 		
         //Headers
@@ -758,4 +764,9 @@ Util.prototype.parseQueryString = function(qs, parsed) {
 	}
 	
 	return parsed;
+};
+
+Util.prototype.getServerRoot = function (absoluteUrl) {
+    var urlParts = absoluteUrl.split("/");
+    return urlParts[0] + "//" + urlParts[2];
 };

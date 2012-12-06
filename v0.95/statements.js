@@ -483,7 +483,7 @@ function continueTokenTest(ascending){
         },
         function(moreUrl, cb){
             //Get next page, two more records...
-            util.request('GET', moreUrl, null, true, 200, 'OK', function(xhr) {
+            util.request('GET', util.getServerRoot(util.endpoint) + moreUrl, null, true, 200, 'OK', function(xhr) {
 		        var result = util.tryJSONParse(xhr.responseText);
                 var statements = result.statements;
 		        equal(statements.length, 2, 'GET (more url) limit 2');
@@ -493,7 +493,7 @@ function continueTokenTest(ascending){
         },
         function(moreUrl, cb){
             //Get next page, two more records...
-            util.request('GET', moreUrl, null, true, 200, 'OK', function(xhr) {
+            util.request('GET', util.getServerRoot(util.endpoint) + moreUrl, null, true, 200, 'OK', function(xhr) {
 		        var result = util.tryJSONParse(xhr.responseText);
                 var statements = result.statements;
 		        equal(statements.length, 2, 'GET (second more url) limit 2');
