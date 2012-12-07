@@ -770,3 +770,10 @@ Util.prototype.getServerRoot = function (absoluteUrl) {
     var urlParts = absoluteUrl.split("/");
     return urlParts[0] + "//" + urlParts[2];
 };
+
+Util.prototype.getAbsoluteMoreUrl = function (moreUrl) {
+    if (moreUrl.indexOf("/") !== 0) {
+        moreUrl = "/" + moreUrl;
+    }
+    return this.getServerRoot(this.endpoint) + moreUrl;
+};
